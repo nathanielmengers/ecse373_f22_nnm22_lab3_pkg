@@ -1,0 +1,19 @@
+<launch>
+    <arg name = "use_new_xacro" default = "true"/>
+
+    <arg if = "$(arg use_new_xacro)" name = "use_xacro" default="true" />
+    <arg if = "$(arg use_new_xacro)" name = "filename" default = "append_linkages.xacro" />
+    <arg if = "$(arg use_new_xacro)" name = "file" default = "$(find lab3_pkg)/urdf/$(arg filename)" />
+    <arg if = "$(arg use_new_xacro)" name = "use_gui" default = "false" />
+    <arg if = "$(arg use_new_xacro)" name = "config_filename" default = "config_with_lasers_and_map.rviz"/>
+
+    <param if = "$(arg use_new_xacro)" name = "use_sim_time" value = "true"/>
+    <node pkg = "rosbag" type = "play" name = "rosbag" args = "--clock $(find lab3_pkg)/bags/glennan_5_complete.bag /tf_trajectory:=/tf" />
+    
+    <arg name = "map_file" default = "$(find maps_glennan)/maps/glennan5_map.yaml" />
+    <node pkg = "map_server" type = "map_server" name = "map" args = "$(arg map_file)" />
+        
+    
+    <include file="$(find navvis_description)/launch/display.launch" pass_all_args = "true"/>
+
+</launch>
