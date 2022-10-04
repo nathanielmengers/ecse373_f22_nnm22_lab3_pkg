@@ -6,9 +6,11 @@
     <arg if = "$(arg use_new_xacro)" name = "file" default = "$(find lab3_pkg)/urdf/$(arg filename)" />
     <arg if = "$(arg use_new_xacro)" name = "use_gui" default = "false" />
     <arg if = "$(arg use_new_xacro)" name = "config_filename" default = "config_with_lasers_and_map.rviz"/>
+    
+    <arg name = "bag_file" default = "$(find lab3_pkg)/bags/glennan_5_complete.bag"/>
 
     <param if = "$(arg use_new_xacro)" name = "use_sim_time" value = "true"/>
-    <node pkg = "rosbag" type = "play" name = "rosbag" args = "--clock $(find lab3_pkg)/bags/glennan_5_complete.bag /tf_trajectory:=/tf" />
+    <node pkg = "rosbag" type = "play" name = "rosbag" args = "--clock $(arg bag_file) /tf_trajectory:=/tf" />
     
     <arg name = "map_file" default = "$(find maps_glennan)/maps/glennan5_map.yaml" />
     <node pkg = "map_server" type = "map_server" name = "map" args = "$(arg map_file)" />
