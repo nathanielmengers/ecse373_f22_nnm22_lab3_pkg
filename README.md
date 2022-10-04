@@ -22,9 +22,13 @@ To use with default settings, the following command should be executed in comman
   - Sets **use_xacro** to *true*
   - Changes the **file** argument so that the file path includes this package instead of navvis_description
   - Sets the **config_file** argument to *config_with_lasers_and_map*. This configuration enable Gazebo to show LIDAR  and map data. Other options include *config.rviz*, *config_with_lasers.rviz*, or a custom configuration file. 
+  - To execute the navvis_description launch file with the navvis_description default arguments, set the **use_new_xacro** argument to false:
+    > roslaunch lab3_pkg lab3_launch.launch use_new_xacro:=false
+
   
-- **bag_file** <default = *../lab3_pkg/bags/glennan_5_complete.bag*
-  Specifies the source for the bagged data for LIDAR and the robot's position relative to the map.
+- **bag_file** <default = *../lab3_pkg/bags/glennan_5_complete.bag*>
+  Specifies the source for the bagged data for LIDAR and the robot's position relative to the map. The bag_file argument should include the complete file path, including the directory, name, and extension (.bag) of the file.
+  > roslaunch lab3_pkg lab3_launch.launch bag_file:=<file_location/file_name.bag>
   
 - See navvis_description documentation for further explanation of optional arguments.
   
